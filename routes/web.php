@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Admin\Controllers\TechnologyController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController; //remenber to add!
 use App\Http\Controllers\Admin\SkillController; //remenber to add!
