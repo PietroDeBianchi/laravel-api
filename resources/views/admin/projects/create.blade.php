@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container mt-4 px-4">
-    <form method="POST" action="{{route('admin.projects.store')}}">
+    <form method="POST" action="{{route('admin.projects.store')}}" enctype="multipart/form-data">
     @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -63,7 +63,7 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{old('image')}}">
+            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{old('image')}}">
             @error('image')
                 <div class="invalid-feedback">
                     {{$message}}

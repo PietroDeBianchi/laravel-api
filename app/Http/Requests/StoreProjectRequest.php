@@ -27,7 +27,7 @@ class StoreProjectRequest extends FormRequest
             'title' => 'required|max:30|unique:project',
             'sub_title' => 'required|max:100',
             'description' => 'required|max:400',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|max:1024', // 1024 Kb = 1 Mb -> request important!
             'skill_id' => 'nullable|exists:skills,id',
             'technologies' => 'exists:technologies,id'
         ];

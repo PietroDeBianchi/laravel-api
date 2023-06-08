@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateProjectRequest; //remenber to add!
 use App\Models\Project;
 use App\Models\Skill;
 use App\Models\Technology;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; // remenber to add!
 
 class ProjectController extends Controller
@@ -41,22 +43,28 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(StoreProjectRequest $request)
     {
         $validated_data = $request->validated();
-        $validated_data['slug'] = Str::slug($request['title'], '-');
+        $validated_data['slug'] = Str::slug($request->input('title'), '-');
 
-        $newProject = new Project();
-        $newProject->fill($validated_data);
-        $newProject->save();
+        $newProject = Project::create($validated_data);
 
-        //is_array => $request->technologies is an array of technology IDs
-        if (is_array($request->technologies)) {
-            $newProject->technologies()->attach($request->technologies);
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('upload');
+            $newProject->image = $path;
+            $newProject->save();
+        }
+
+        // Assuming $request->input('technologies') is an array of technology IDs
+        if (is_array($request->input('technologies'))) {
+            $newProject->technologies()->attach($request->input('technologies'));
         }
 
         return redirect()->route('admin.projects.show', ['project' => $newProject->slug]);
     }
+
 
     /**
      * Display the specified resource.
@@ -89,14 +97,29 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
+
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $validated_data = $request->validated();
-        $validated_data['slug'] = Str::slug($request['title'], '-');
-        $project->technologies()->sync($request->technologies);
+        $validated_data['slug'] = Str::slug($validated_data['title'], '-');
+        $project->technologies()->sync($request->input('technologies'));
+
+        if ($request->hasFile('image')) {
+            if ($project->image) {
+                Storage::delete($project->image);
+            }
+
+            $path = $request->file('image')->store('upload');
+            $validated_data['image'] = $path;
+        }
+
         $project->update($validated_data);
+        $project = $project->fresh();
+
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
     }
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -15,6 +15,11 @@
         </div>
         <p>{{$project->description}}</p>
         <p>{{$project->skill?$project->skill->type:'NULL'}}</p>
+        @if ($project->image)
+            <img class="card-img-top" src="{{ asset('storage/' . $project->image)}}" alt="{{$project->title}}">
+        @else
+            <img class="card-img-top" src="https://i.ebayimg.com/images/g/BBYAAOSwT-Neb3XT/s-l400.jpg" alt="{{$project->title}}">
+        @endif
     </div>
     <div>
         <a href="{{route('admin.projects.index')}}" class="btn btn-primary">Go Back to List</a> 

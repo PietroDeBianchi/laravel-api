@@ -28,7 +28,8 @@ class UpdateProjectRequest extends FormRequest
             'title' => ['required', 'max:30', Rule::unique('project')->ignore($this->project)], //to edit the project without the needs to change the 'title' because is unique
             'sub_title' => 'nullable|max:100',
             'description' => 'required|max:400',
-            'image' => 'nullable|max:255|url',
+            'image' => 'nullable|image|max:1024',
+            'skill_id' => 'nullable|exists:skills,id',
             'technologies' => 'exists:technologies,id'
         ];
     }
