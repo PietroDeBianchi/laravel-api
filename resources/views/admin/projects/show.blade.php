@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container" id="ContainerCard">
-    <div id="projectCard">
+    <div id="projectCardShow">
         <h1>{{$project->title}}</h1>
         <h4>{{$project->sub_title}}</h4>
         <div class="mb-2">

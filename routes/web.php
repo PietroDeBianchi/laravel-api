@@ -30,13 +30,18 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         // Route = / + prefix (admin) = '/admin' -> linkedto DashboardController
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
         // Route = / + prefix (admin) + projects = '/admin/projects' -> linkedto ProjectController
         Route::resource('projects', ProjectController::class)->parameters([
             'projects' => 'project:slug' // added slug parameter for URL
         ]);
+
+        Route::get('projects/{project}/imageDelete', [ProjectController::class, 'imageDelete'])->name('projects.imageDelete');
+
         Route::resource('skills', SkillController::class)->parameters([
             'skills' => 'skill:slug' // added slug parameter for URL
         ])->except(['show']);
+
         Route::resource('technologies', TechnologyController::class)->parameters([
             'technologies' => 'techology:slug' // added slug parameter for URL
         ])->except(['show']);

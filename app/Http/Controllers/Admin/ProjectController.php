@@ -129,7 +129,25 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index');
+    }
+
+    public function imageDelete($project)
+    {
+        $project = Project::where('slug', $project)->firstOrFail();
+
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
+
+        $project->image = null;
+        $project->save();
+
+        return redirect()->route('admin.projects.edit', $project->slug);
     }
 }

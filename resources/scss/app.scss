@@ -1,6 +1,30 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 
-#projectCard {
+#projectCardIndex {
+    .delete-btn {
+        right: 0;
+        top: -1px;
+
+        button {
+            border-radius: 0 4px 0 4px;
+        }
+    }
+}
+
+#projectCardEdit {
+    .imgageContainer {
+        width: 240px;
+        border: 1px solid rgb(162, 157, 157);
+
+        .btn-danger {
+            top: -1px;
+            right: 0;
+            border-radius: 0 0 0 4px;
+        }
+    }
+}
+
+#projectCardShow {
     img {
         max-width: 240px;
     }

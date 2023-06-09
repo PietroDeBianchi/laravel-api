@@ -29,7 +29,7 @@ class StoreProjectRequest extends FormRequest
             'description' => 'required|max:400',
             'image' => 'nullable|image|max:1024', // 1024 Kb = 1 Mb -> request important!
             'skill_id' => 'nullable|exists:skills,id',
-            'technologies' => 'exists:technologies,id'
+            'technologies' => 'nullable|exists:technologies,id'
         ];
     }
 }
