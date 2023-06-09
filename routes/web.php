@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified'])
             'projects' => 'project:slug' // added slug parameter for URL
         ]);
 
-        Route::get('projects/{project}/imageDelete', [ProjectController::class, 'imageDelete'])->name('projects.imageDelete');
+        Route::get('projects/{slug}/imageDelete', [ProjectController::class, 'imageDelete'])->name('projects.imageDelete');
 
         Route::resource('skills', SkillController::class)->parameters([
             'skills' => 'skill:slug' // added slug parameter for URL
