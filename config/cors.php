@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('APP_FRONT_URL', 'http://localhost:5174')], //API Config to vite-bootfolio REPO
+    'allowed_origins' => [env('APP_FRONT_URL', 'http://localhost:5174')], //API Config to vite-bootfolio REPO (Allowed URL to use API)
 
     'allowed_origins_patterns' => [],
 
