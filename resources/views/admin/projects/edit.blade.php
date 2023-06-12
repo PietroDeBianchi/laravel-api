@@ -72,6 +72,11 @@
                 <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top" alt="{{$project->title}}">
                 <a href="{{ route('admin.projects.imageDelete', $project->slug) }}" class="btn btn-danger position-absolute"><i class="fa-solid fa-trash-can"></i></a>
             </div>
+            @else
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
             @endif
             <button type="submit" class="btn btn-primary mt-2">Save</button>
     </form>
