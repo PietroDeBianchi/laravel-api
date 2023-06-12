@@ -17,4 +17,14 @@ class ProjectController extends Controller
             'results' => $projects
         ]);
     }
+
+    public function show($slug)
+    {
+        $project = Project::where('slug', $slug)->with(['skill', 'technologies'])->first();
+
+        return response()->json([
+            'success' => true,
+            'project' => $project
+        ]);
+    }
 }
