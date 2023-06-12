@@ -22,9 +22,16 @@ class ProjectController extends Controller
     {
         $project = Project::where('slug', $slug)->with(['skill', 'technologies'])->first();
 
-        return response()->json([
-            'success' => true,
-            'project' => $project
-        ]);
+        if ($project) {
+            return response()->json([
+                'success' => true,
+                'project' => $project
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'error' => 'Project not found'
+            ]);
+        }
     }
 }
